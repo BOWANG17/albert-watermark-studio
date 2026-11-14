@@ -1,0 +1,6 @@
+# 项目依赖（Python 3.11+）
+pillow>=10.0
+pyside6>=6.6
+
+# 打包（仅 macOS 打包 .app 时需要）
+pyinstaller>=6.0
