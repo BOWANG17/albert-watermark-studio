@@ -1,0 +1,35 @@
+name: 💡 功能建议
+description: 提出新功能或改进建议
+title: "[建议] 一句话描述你的想法"
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你的建议！欢迎告诉我们你希望软件增加或改进什么功能 🎉
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 你想解决什么问题？
+      description: 描述你遇到的使用场景或痛点，这能帮我们理解需求的来源。
+      placeholder: "例如：我想批量给照片加时间戳，但每次只能一张张来"
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 你希望怎么改进？
+      description: 描述你期望的功能或改法，越具体越好。
+      placeholder: "例如：希望能勾选多张照片后，一次性给所有照片加上拍摄时间"
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: 补充说明（可选）
+      description: 其他任何想法、参考的软件等。
+    validations:
+      required: false

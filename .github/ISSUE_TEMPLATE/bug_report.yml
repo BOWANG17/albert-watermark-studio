@@ -1,0 +1,78 @@
+name: 🐛 Bug 报告
+description: 报告软件的 bug、崩溃或异常行为
+title: "[Bug] 简要描述问题"
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你花时间报告问题！请尽量填写完整，帮助我们快速定位和修复 🙏
+
+  - type: input
+    id: version
+    attributes:
+      label: 软件版本
+      description: 在哪个版本遇到问题的？（可在软件「关于」或 Release 页面查看，例如 v1.3.0）
+      placeholder: "例如：v1.3.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: 操作系统
+      description: 你使用的系统是？
+      options:
+        - Windows
+        - macOS（Apple Silicon / M 系列芯片）
+        - macOS（Intel 芯片）
+        - 其他
+    validations:
+      required: true
+
+  - type: textarea
+    id: what_happened
+    attributes:
+      label: 发生了什么问题？
+      description: 用一两句话描述你遇到的问题（例如：导出时崩溃 / 图片水印不显示 / 加了水印但保存后没有）。
+      placeholder: "描述你看到的异常现象"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      description: 请按顺序写出如何触发这个问题，越详细越好。
+      placeholder: |
+        1. 打开软件，导入 3 张照片
+        2. 给第 1 张选模板 A，第 2 张选模板 B
+        3. 点击导出
+        4. 发现导出的照片全是同一种模板
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望的结果
+      description: 你原本希望它怎样表现？
+      placeholder: "例如：每张照片应该保留各自选择的模板"
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: 截图或录屏（可选）
+      description: 如有截图，直接拖拽到此处即可上传。
+    validations:
+      required: false
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: 补充信息（可选）
+      description: 其他有助于定位问题的信息，例如图片格式、尺寸、是否批量操作等。
+    validations:
+      required: false

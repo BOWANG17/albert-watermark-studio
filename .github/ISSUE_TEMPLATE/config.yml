@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 💬 常见问题（FAQ）
+    url: https://github.com/BOWANG17/albert-watermark-studio#readme
+    about: 使用前先看看 README 里的说明，可能已经有答案
+  - name: 📦 下载最新版本
+    url: https://github.com/BOWANG17/albert-watermark-studio/releases
+    about: 前往 Releases 页面下载适合你系统的版本
