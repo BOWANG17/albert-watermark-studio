@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import sys
 
+from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication
 
 from .resources import resource_path
@@ -39,9 +40,18 @@ def main() -> int:
     app.setApplicationName("Albert水印工坊")
     app.setOrganizationName("personal")
 
+    # 窗口图标（Windows 任务栏/标题栏图标依赖它；macOS 由 Bundle 图标兜底）。
+    # 用品牌 α 图标作为运行时窗口图标，避免 Windows 任务栏显示默认 exe 图标。
+    _icon_path = resource_path("assets", "icons", "alpha-orange.png")
+    if _icon_path.exists():
+        _app_icon = QIcon(str(_icon_path))
+        app.setWindowIcon(_app_icon)
+
     _load_theme(app)
 
     window = MainWindow()
+    if _icon_path.exists():
+        window.setWindowIcon(_app_icon)
     window.show()
 
     return app.exec()

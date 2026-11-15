@@ -649,7 +649,10 @@ class MainWindow(QMainWindow):
 
         # 滑出编辑面板
         self._show_editor(name)
-        self._refresh_preview()
+        # 模板点击是低频单次操作，直接同步写入当前图快照 + 刷新预览，
+        # 不走防抖定时器（否则用户点完模板立即切图/导出时，快照可能因
+        # 120ms 防抖未到期而丢失，导致多图不同模板导出成同一种——bug）。
+        self._on_preview_edit()
 
     def _layout_name_from_value(self, layout: str) -> str:
         """布局值 -> 界面名（LAYOUT_CHOICES 反向查找）。"""
