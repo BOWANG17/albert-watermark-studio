@@ -18,8 +18,12 @@
 
 ### 环境要求
 
-- macOS（当前在 macOS 上开发与打包）
+- macOS（Apple Silicon 或 Intel 均可）
 - Python 3.11+
+
+> 💡 **下载现成 App**：无需安装 Python，直接到 [Releases](../../releases) 页面，按你的芯片选择对应安装包：
+> - **Apple 芯片（M1/M2/M3/M4/M5 及后续 M 系列）** → `macOS-AppleSilicon` 版（arm64 原生）
+> - **Intel 芯片** → `macOS-Intel` 版（x86_64）
 
 ### 安装依赖
 
