@@ -1,0 +1,66 @@
+# 自动打包 macOS 版本（Intel x86_64 与 Apple Silicon arm64）
+# 触发：推送 tag（如 v1.2.0）或手动在 Actions 页面点 "Run workflow"
+name: Build macOS App
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Apple Silicon (M 系列) 原生 arm64 —— macos-14 是 arm64 runner
+          - os: macos-14
+            arch: arm64
+            asset_suffix: "macOS-AppleSilicon"
+          # Intel x86_64 —— macos-13 是 Intel runner
+          - os: macos-13
+            arch: x86_64
+            asset_suffix: "macOS-Intel"
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pillow pyside6 pyinstaller
+
+      - name: Build with PyInstaller
+        run: |
+          pyinstaller --clean --noconfirm build_watermark.spec
+
+      - name: Rename app with arch
+        run: |
+          mv "dist/Albert水印工坊.app" "dist/Albert水印工坊-${{ matrix.asset_suffix }}.app"
+
+      - name: Create zip (preserve symlinks)
+        run: |
+          cd dist
+          zip -r -y "../Albert水印工坊-${{ matrix.asset_suffix }}.zip" "Albert水印工坊-${{ matrix.asset_suffix }}.app"
+          cd ..
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Albert水印工坊-${{ matrix.asset_suffix }}
+          path: "Albert水印工坊-${{ matrix.asset_suffix }}.zip"
+
+      - name: Upload to Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: "Albert水印工坊-${{ matrix.asset_suffix }}.zip"
