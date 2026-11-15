@@ -30,14 +30,22 @@ from typing import Optional, Tuple
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 
-# 字体路径（macOS 系统字体，正式版打包进 assets）
-FONT_SANS = "/System/Library/Fonts/Hiragino Sans GB.ttc"          # 冬青黑（无衬线）
-FONT_SERIF = "/System/Library/Fonts/Supplemental/Songti.ttc"      # 宋体（衬线，α 用它）
-
 # 素材目录（贴图 logo，兼容开发/打包两种模式）
 from ..resources import resource_path
 
 _ICON_DIR = resource_path("assets", "icons")
+
+# 字体路径：跨平台自适应
+#   - macOS：优先系统字体（冬青黑无衬线 / 宋体衬线）
+#   - Windows/Linux：回退到打包进 assets 的开源字体（MiSans 无衬线 / 思源宋体衬线）
+import sys as _sys
+
+if _sys.platform == "darwin":
+    FONT_SANS = "/System/Library/Fonts/Hiragino Sans GB.ttc"          # 冬青黑（无衬线）
+    FONT_SERIF = "/System/Library/Fonts/Supplemental/Songti.ttc"      # 宋体（衬线，α 用它）
+else:
+    FONT_SANS = str(resource_path("assets", "fonts", "MiSans-Regular.ttf"))   # 小米无衬线
+    FONT_SERIF = str(resource_path("assets", "fonts", "SourceHanSerifCN-Regular.otf"))  # 思源宋体（衬线）
 ALPHA_BLACK = str(_ICON_DIR / "alpha-black-trim.png")       # 黑色 α（手写体+方框）
 ALPHA_ORANGE = str(_ICON_DIR / "alpha-orange-trim.png")     # 橙色 α
 SONY_WORDMARK_BLACK = str(_ICON_DIR / "sony-wordmark-trim.png")   # 黑色 SONY 字标

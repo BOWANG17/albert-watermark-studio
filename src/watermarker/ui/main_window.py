@@ -76,10 +76,19 @@ IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".webp", ".bmp", ".tiff", ".tif"}
 POSITIONS = ["左上", "中上", "右上", "左中", "正中", "右中", "左下", "中下", "右下"]
 
 # 字体映射：界面名 -> 字体文件路径
-# 前两个是 macOS 系统字体（绝对路径）；后四个是打包进 App 的开源字体（resource_path 定位）
+#   前两个是 macOS 系统字体（绝对路径）；后四个是打包进 App 的开源字体（resource_path 定位）。
+#   跨平台：macOS 用系统字体；Windows/Linux 时前两个回退到开源字体（MiSans 无衬线 / 思源宋体衬线）。
+import sys as _sys
+if _sys.platform == "darwin":
+    _SANS_PATH = "/System/Library/Fonts/Hiragino Sans GB.ttc"
+    _SERIF_PATH = "/System/Library/Fonts/Supplemental/Songti.ttc"
+else:
+    _SANS_PATH = str(resource_path("assets", "fonts", "MiSans-Regular.ttf"))
+    _SERIF_PATH = str(resource_path("assets", "fonts", "SourceHanSerifCN-Regular.otf"))
+
 FONT_MAP = {
-    "冬青黑体 (Hiragino Sans GB)": "/System/Library/Fonts/Hiragino Sans GB.ttc",
-    "宋体 (Songti)": "/System/Library/Fonts/Supplemental/Songti.ttc",
+    "冬青黑体 (Hiragino Sans GB)": _SANS_PATH,
+    "宋体 (Songti)": _SERIF_PATH,
     "MiSans 常规": str(resource_path("assets", "fonts", "MiSans-Regular.ttf")),
     "MiSans 粗体": str(resource_path("assets", "fonts", "MiSans-Bold.ttf")),
     "思源宋体 常规": str(resource_path("assets", "fonts", "SourceHanSerifCN-Regular.otf")),

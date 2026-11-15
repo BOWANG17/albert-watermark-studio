@@ -12,6 +12,10 @@ __pycache__/
 build/
 dist/
 
+# 但图标文件需要随仓库走（打包时要用）
+!build/*.ico
+!build/*.icns
+
 # 测试输出 / 临时预览图
 fixtures/out_*/
 fixtures/raw/
