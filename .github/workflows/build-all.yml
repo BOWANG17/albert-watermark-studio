@@ -91,16 +91,16 @@ jobs:
       - name: Create zip
         shell: powershell
         run: |
-          Compress-Archive -Path "dist/Albert水印工坊/*" -DestinationPath "Albert水印工坊-Windows-x64.zip"
+          Compress-Archive -Path "dist/AlbertWatermarkStudio/*" -DestinationPath "AlbertWatermarkStudio-Windows-x64.zip"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Albert水印工坊-Windows-x64
-          path: "Albert水印工坊-Windows-x64.zip"
+          name: AlbertWatermarkStudio-Windows-x64
+          path: "AlbertWatermarkStudio-Windows-x64.zip"
 
       - name: Upload to Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: "Albert水印工坊-Windows-x64.zip"
+          files: "AlbertWatermarkStudio-Windows-x64.zip"
