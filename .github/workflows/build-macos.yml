@@ -14,12 +14,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # Apple Silicon (M 系列) 原生 arm64 —— macos-14 是 arm64 runner
-          - os: macos-14
+          # Apple Silicon (M 系列) 原生 arm64 —— macos-15 是 arm64 runner
+          - os: macos-15
             arch: arm64
             asset_suffix: "macOS-AppleSilicon"
-          # Intel x86_64 —— macos-13 是 Intel runner
-          - os: macos-13
+          # Intel x86_64 —— macos-15-intel 是 Intel runner
+          - os: macos-15-intel
             arch: x86_64
             asset_suffix: "macOS-Intel"
 
