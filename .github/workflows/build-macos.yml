@@ -8,6 +8,10 @@ on:
       - 'v*'
   workflow_dispatch:
 
+# 允许 GITHUB_TOKEN 创建/写入 Release（否则 softprops/action-gh-release 会 403）
+permissions:
+  contents: write
+
 jobs:
   build:
     strategy:
